@@ -24,23 +24,23 @@
 
 <body style="font-family: Open Sans, sans-serif">
     <section class="px-6 py-8">
-        <nav class="md:flex md:justify-between md:items-center">
-            <div>
-                <a href="/">
-                    <img src="/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
-                </a>
-            </div>
+        <nav class="md:flex md:justify-between md:items-center background-color:lightblue">
 
             <div class="mt-8 md:mt-0 flex items-center">
-                    <a href="/register" class="text-xs font-bold uppercase">Register</a>
-                    <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
+
+                    <a href="/" class="text-xs font-bold uppercase">Главная страница</a>
+                    <a href="/register" class="ml-6 text-xs font-bold uppercase">Регистрация</a>
+                    <a href="/login" class="ml-6 text-xs font-bold uppercase">Вход</a>
+            </div>
+            <div class="mt-8 md:mt-0 flex items-center">
+                <a href="/category/create" class="text-xs font-bold uppercase">Создать категорию</a>
             </div>
         </nav>
 
         {{ $slot }}
 
         <footer id="newsletter" class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
-            <img src="/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
+            <img src="#" alt="" class="mx-auto -mb-6" style="width: 145px;">
 
             <div class="mt-10">
                 <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">

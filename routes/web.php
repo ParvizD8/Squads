@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [CategoryController::class, 'index']);
+Route::get('category/create', [CategoryController::class, 'create']);
+Route::get('category/{category}', [CategoryController::class, 'show']);
+Route::post('category', [CategoryController::class, 'store']);
+Route::get('category/{category}/edit', [CategoryController::class, 'edit']);
+Route::patch('category/{category}', [CategoryController::class, 'update']);
+Route::delete('category/{category}', [CategoryController::class, 'destroy']);
+
+Route::get('test', [MemberController::class, 'test']);
+
+

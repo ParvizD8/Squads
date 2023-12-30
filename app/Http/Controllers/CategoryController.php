@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Member;
+use App\Models\Team;
 use App\Usecases\Divide;
 use Illuminate\Validation\Rule;
 
@@ -17,8 +18,26 @@ class CategoryController extends Controller
     }
 
     public function show(Category $category)
-    {
+    {   
         return view('category.show', [
+            'category' => $category
+        ]);
+    }
+
+    public function showTeams(Category $category)
+    {
+        $teams = Team::all()->where('category_id', $category->id);
+        return view('category.show-teams', [
+            'teams' => $teams,
+            'category' => $category
+        ]);
+    }
+
+    public function showMembers(Category $category)
+    {
+        $members = Member::all()->where('category_id', $category->id);
+        return view('category.show-members', [
+            'members' => $members,
             'category' => $category
         ]);
     }
@@ -30,9 +49,10 @@ class CategoryController extends Controller
 
     public function store()
     {
-        Category::create(request()->validate([
-            'name' => ['required', Rule::unique('categories', 'name')],
-        ]));
+        // Category::create(request()->validate([
+        //     'name' => ['required', Rule::unique('categories', 'name')],
+        // ]));
+        Category::create($this->validateCategory());
         
         return redirect('/');
     }

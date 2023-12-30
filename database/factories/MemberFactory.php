@@ -18,7 +18,6 @@ class MemberFactory extends Factory
     {
         return [
             'category_id' => 1,
-            'team_id' => null,
             'name' => fake()->name(),
             'level' => fake()->numberBetween(3, 10),
             'active' => fake()->boolean()

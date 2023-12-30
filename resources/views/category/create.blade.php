@@ -14,7 +14,7 @@
                             type="text" 
                             name="name" 
                             id="name"
-                            value="{{ old('name') }}"
+                            value=""
                             required
                     >
 

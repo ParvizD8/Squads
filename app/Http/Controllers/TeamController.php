@@ -3,26 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Member;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class TeamController extends Controller
 {
-    public function index(Category $category)
+    public function show(Team $team)
     {
-        dd($category);
-        $teams = Team::all()->where('category_id', $category->id);
-        return view('team.index', [
-            'teams' => $teams,
-            'category' => $category
-        ]);
-    }
+        $membersWithTeam = Team::with('members')->where('id', $team->id)->paginate(5);
 
-    public function show(TeamController $teamController)
-    {
-        return view('category.show', [
-            'teamController' => $teamController
+        return view('team.show', [
+            'membersWithTeam' => $membersWithTeam
         ]);
     }
 
@@ -60,7 +53,7 @@ class TeamController extends Controller
         return back();
     }
 
-    public function validateTeam(?Team $team = null): array
+    protected function validateTeam(?Team $team = null): array
     {
         $team ??= new team();
 

@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->hasMany(Team::class);
     }
+
+    public function toss()
+    {
+        return $this->hasMany(Toss::class);
+    }
 }

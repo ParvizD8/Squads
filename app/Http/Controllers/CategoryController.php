@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Member;
 use App\Models\Team;
-use App\Usecases\Divide;
+use App\Models\Toss;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
 
 class CategoryController extends Controller
 {
@@ -18,15 +19,20 @@ class CategoryController extends Controller
     }
 
     public function show(Category $category)
-    {   
+    {
+        $teamsWithMembers = Team::with(['members'])->where('category_id', $category->id)->get();
+
         return view('category.show', [
-            'category' => $category
+            'category' => $category,
+            'teamsWithMembers' => $teamsWithMembers,
+            'tossExists' => Toss::where('category_id', $category->id)->exists()
+
         ]);
     }
 
     public function showTeams(Category $category)
     {
-        $teams = Team::all()->where('category_id', $category->id);
+        $teams = Team::where('category_id', $category->id)->paginate(5);
         return view('category.show-teams', [
             'teams' => $teams,
             'category' => $category
@@ -35,7 +41,7 @@ class CategoryController extends Controller
 
     public function showMembers(Category $category)
     {
-        $members = Member::all()->where('category_id', $category->id);
+        $members = Member::where('category_id', $category->id)->paginate(15);
         return view('category.show-members', [
             'members' => $members,
             'category' => $category
@@ -49,11 +55,8 @@ class CategoryController extends Controller
 
     public function store()
     {
-        // Category::create(request()->validate([
-        //     'name' => ['required', Rule::unique('categories', 'name')],
-        // ]));
         Category::create($this->validateCategory());
-        
+
         return redirect('/');
     }
 
@@ -69,7 +72,6 @@ class CategoryController extends Controller
         $category->update($this->validateCategory($category));
 
         return redirect('/');
-
     }
 
     public function destroy(Category $category)

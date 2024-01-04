@@ -20,7 +20,7 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center ml-4 text-sm font-medium text-gray-900">
-                                            <b>Название команды</b>
+                                            <b>Имя участника</b>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -32,12 +32,6 @@
                                         <div class="flex items-center ml-4 text-sm font-medium text-gray-900">
                                             <b>Активность</b>
                                         </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <b>Редактировать</b>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <b>Удалить</b>
                                     </td>
                                 </tr>
 
@@ -80,7 +74,7 @@
 
 
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="/member/{{ $member->id }}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
+                                        <a href="/member/{{ $member->id }}/edit" class="text-blue-500 hover:text-blue-600">Редактировать</a>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -88,7 +82,7 @@
                                             @csrf
                                             @method('DELETE')
 
-                                            <button class="text-xs text-gray-400">Delete</button>
+                                            <button class="text-sm font-medium text-red-500">Удалить</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -98,9 +92,10 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-600">
+            <button type="submit" class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-600 mb-10">
                 <a href="/member/create">Добавить игрока</a>
             </button>
         </main>
     </div>
+    {{ $members->links() }}
 </x-layout>

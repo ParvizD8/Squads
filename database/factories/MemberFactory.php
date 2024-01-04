@@ -20,7 +20,7 @@ class MemberFactory extends Factory
             'category_id' => 1,
             'name' => fake()->name(),
             'level' => fake()->numberBetween(3, 10),
-            'active' => fake()->boolean()
+            'active' => true
         ];
     }
 }

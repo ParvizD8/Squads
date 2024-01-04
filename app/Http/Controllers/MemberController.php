@@ -12,21 +12,6 @@ class MemberController extends Controller
 {
     public function __construct(private readonly Divide $divide) {}
 
-    public function test(Member $member)
-    {
-        $request = array('category' => 1, 'count' => 5);
-
-        // $result = Member::divide($request['category'])->get();
-
-        $members = $member
-                    ->where('category_id', 1)
-                    ->where('active', 1)
-                    ->orderBy('level','desc')
-                    ->get();
-        
-        $this->divide->getDivideResult($members, $request['count']);
-    }
-
     public function index(Category $category)
     {
         $members = Member::all()->where('category_id', $category->id);
@@ -57,7 +42,7 @@ class MemberController extends Controller
 
     public function update(Member $member)
     {
-        $member->update($this->validateTeam($member));
+        $member->update($this->validateMember($member));
         return redirect('/');
 
     }
@@ -78,11 +63,11 @@ class MemberController extends Controller
         return back();
     }
 
-    public function validateTeam(?Member $member = null): array
+    public function validateMember(?Member $member = null): array
     {
         $member ??= new Member();
         return request()->validate([
-            'name' => ['required', Rule::unique('members', 'name')],
+            'name' => ['required', Rule::unique('members', 'name')->ignore($member->id)],
             'level' => 'required|numeric|between:1,10',
             'category_id' => 'required'
         ]);

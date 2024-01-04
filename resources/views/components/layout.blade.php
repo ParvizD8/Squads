@@ -29,11 +29,6 @@
             <div class="mt-8 md:mt-0 flex items-center">
 
                     <a href="/" class="text-xs font-bold uppercase">Главная страница</a>
-                    <a href="/register" class="ml-6 text-xs font-bold uppercase">Регистрация</a>
-                    <a href="/login" class="ml-6 text-xs font-bold uppercase">Вход</a>
-            </div>
-            <div class="mt-8 md:mt-0 flex items-center">
-                <a href="/category/create" class="text-xs font-bold uppercase">Создать категорию</a>
             </div>
         </nav>
 
